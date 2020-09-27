@@ -1,16 +1,27 @@
 import java.util.*;
 
 public class AddressBook {
-
 	private ArrayList<ContactDetails> contactList = new ArrayList<>();
+
+	public ArrayList<ContactDetails> AddContactDetails() {
+		return contactList;
+	}
 
 	public void addContact(ContactDetails cd){
 		contactList.add(cd);
-		System.out.println(contactList.size());
+	}
+
+	public ArrayList<ContactDetails> viewAddedContact() {
+		ArrayList<ContactDetails> viewContactDetail = new ArrayList<>();
+		for(int i = 0; i < contactList.size(); i++) {
+			viewContactDetail.add(contactList.get(i));
+		}
+		return viewContactDetail;
 	}
 
 	private Scanner sc = new Scanner(System.in);
-public boolean editContactDetails(String contactName) {
+
+	public boolean editContactDetails(String contactName) {
 		int flag = 1;
 		if(contactList.size() > 0 && flag == 1) {
 			for(int i = 0;i < contactList.size(); i++ ) {
@@ -56,10 +67,12 @@ public boolean editContactDetails(String contactName) {
 					}
 				}
 				else {
+					//System.out.println("Cannot be Edited");
 					return false;
 				}
 			}
 		}else {
+			//System.out.println("No Element Added");
 			return false;
 		}
 		return true;
@@ -75,9 +88,8 @@ public boolean editContactDetails(String contactName) {
 		}
 		if(flag == 1) {
 			return true;
-		}else
+		} else
 			return false;
 
 	}
-
 }
