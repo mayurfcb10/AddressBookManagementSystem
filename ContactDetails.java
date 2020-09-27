@@ -1,19 +1,19 @@
 
-class ContactDetails {
+public class ContactDetails {
 	private String firstName, lastName, address, city, state, email;
 	private int zip, phoneNumber ;
 
 
-	public ContactDetails(String firstName, String lastName, String address, String city, String state, int zip, int phoneNumber, String email) {
-		
-		this.firstName = firstName;
-		this.lastName = lastName;
-		this.address = address;
-		this.city = city;
-		this.state = state;
-		this.zip = zip;
-		this.phoneNumber = phoneNumber;
-		this.email = email;
+	public ContactDetails(String firstName2, String lastName2, String address2, String city2, String state2,
+			int zip2, int phoneNumber2, String email2) {
+		setFirstName(firstName2);
+		setLastName(lastName2);
+		setAddress(address2);
+		setCity(city2);
+		setState(state2);
+		setZip(zip2);
+		setPhoneNumber(phoneNumber2);
+		setEmail(email2);
 	}
 
 	public String getFirstName() {
