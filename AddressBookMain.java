@@ -27,13 +27,21 @@ public class AddressBookMain {
 						int phoneNumber = sc.nextInt();
 						int zip = sc.nextInt();
 						ContactDetails cd = new ContactDetails(firstName, lastName, address, city, state, zip, phoneNumber, email);
-
+						cd.setAddress(address);
+						cd.setCity(city);
+						cd.setEmail(email);
+						cd.setFirstName(firstName);
+						cd.setLastName(lastName);
+						cd.setZip(zip);
+						cd.setPhoneNumber(phoneNumber);
+						cd.setState(state);
+						addressBook.addContact(cd);
 					}
 				}
 				System.out.println("Contact Added Successfully");
 				break;
 			case 2:
-				System.out.println("Enter the firstName of the contact to be edited:");
+				System.out.println("Enter the firstName of the contact is to be edited:");
 				String fName = sc.next();
 				boolean listEdited = addressBook.editContactDetails(fName);
 				if(listEdited == true) {
@@ -42,15 +50,22 @@ public class AddressBookMain {
 					System.out.println("List Cannot be Edited");
 				}
 				break;
-
 			case 3:
+				System.out.println("Enter the firstName of the contact to be deleted:");
+				String deleteContact = sc.next();
+				boolean listDeleted = addressBook.deleteContact(deleteContact);
+				if(listDeleted == true) {
+					System.out.println("Deleted Contact from the List");
+				}else {
+					System.out.println("List Cannot be Deleted");
+				}
+				break;
+			case 4:
 				System.out.println("Exit");
 				break;
 			}
 		}
-		while(choice != 3);
+		while(choice != 4);
 
 	}
-
 }
-		
