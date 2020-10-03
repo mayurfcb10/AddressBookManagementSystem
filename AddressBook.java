@@ -1,95 +1,96 @@
+package com.addressbook;
+
 import java.util.*;
+import java.util.concurrent.ConcurrentHashMap;
+
+import static com.addressbook.AddressBookMain.addressBookListMap;
+import static com.addressbook.AddressBookMain.contactListMap;
 
 public class AddressBook {
-	private ArrayList<ContactDetails> contactList = new ArrayList<>();
+    private final HashMap<String, ContactDetails> contactList;
+    ContactDetails contactDetails1 = new ContactDetails();
+    AddressBookMain addressBookMain = new AddressBookMain();
+    private final Scanner sc = new Scanner(System.in);
+    private String city;
 
-	public ArrayList<ContactDetails> AddContactDetails() {
-		return contactList;
-	}
+    AddressBook(){
+        contactList = new HashMap<String, ContactDetails>();
+    }
 
-	public void addContact(ContactDetails cd){
-		contactList.add(cd);
-	}
+    public HashMap<String, ContactDetails> addContact(String firstName, ContactDetails contactAdded){
+        contactList.put(firstName, contactAdded);
+        return contactList;
+    }
 
-	public ArrayList<ContactDetails> viewAddedContact() {
-		ArrayList<ContactDetails> viewContactDetail = new ArrayList<>();
-		for(int i = 0; i < contactList.size(); i++) {
-			viewContactDetail.add(contactList.get(i));
-		}
-		return viewContactDetail;
-	}
+    public boolean editContactDetails(String contactName) {
+        boolean flag = false;
+        for (Map.Entry<String, ContactDetails> stringContactDetailsEntry : contactList.entrySet()) {
+            Map.Entry m = (Map.Entry) stringContactDetailsEntry;
+            if ((m.getKey().equals(contactName))) {
+                System.out.println("Select the index for the contact detail you want to edit ");
+                System.out.println("1 : First Name of the contact to be edited");
+                System.out.println("2 : Last Name of the contact to be edited");
+                System.out.println("3 : Address of the contact to be edited");
+                System.out.println("4 : City of the contact to be edited");
+                System.out.println("5 : State of the contact to be edited");
+                System.out.println("6 : Email of the contact to be edited");
+                System.out.println("7 : Phone Number of the contact to be edited");
+                System.out.println("8 : Zip of the contact to be edited");
+                int selectContactIndex = sc.nextInt();
+                switch (selectContactIndex) {
+                    case 1:
+                        System.out.println("Enter the new First Name");
+                        contactDetails1.setFirstName(sc.next());
+                        break;
+                    case 2:
+                        System.out.println("Enter the new Last Name");
+                        contactDetails1.setLastName(sc.next());
+                        break;
+                    case 3:
+                        System.out.println("Enter the new Address Name");
+                        contactDetails1.setAddress(sc.next());
+                        break;
+                    case 4:
+                        System.out.println("Enter the new City Name");
+                        contactDetails1.setCity(sc.next());
+                        break;
+                    case 5:
+                        System.out.println("Enter the new State Name");
+                        contactDetails1.setState(sc.next());
+                        break;
+                    case 6:
+                        System.out.println("Enter the new Email");
+                        contactDetails1.setEmail(sc.next());
+                        break;
+                    case 7:
+                        System.out.println("Enter the new Phone Number");
+                        contactDetails1.setPhoneNumber(sc.next());
+                        break;
+                    case 8:
+                        System.out.println("Enter the new Zip Code");
+                        contactDetails1.setZip(sc.next());
+                        break;
 
-	private Scanner sc = new Scanner(System.in);
+                }
+                flag = true;
+                break;
+            }
+        }
 
-	public boolean editContactDetails(String contactName) {
-		int flag = 1;
-		if(contactList.size() > 0 && flag == 1) {
-			for(int i = 0;i < contactList.size(); i++ ) {
-				if(contactName.equals(contactList.get(i).getFirstName())) {
-					System.out.println("Select the index for the contact detail you want to edit \n");
-					System.out.println("1 : First Name of the contact to be edited");
-					System.out.println("2 : Last Name of the contact to be edited");
-					System.out.println("3 : Address of the contact to be edited");
-					System.out.println("4 : City of the contact to be edited");
-					System.out.println("5 : State of the contact to be edited");
-					System.out.println("6 : Email of the contact to be edited");
-					System.out.println("7 : Phone Number of the contact to be edited");
-					System.out.println("8 : Zip of the contact to be edited");
-					int selectContactIndex =  sc.nextInt();
-					switch(selectContactIndex) {
-					case 1:
-						contactList.get(i).setFirstName(sc.next());
-						break;
-					case 2:
-						contactList.get(i).setLastName(sc.next());
-						break;
-					case 3:
-						contactList.get(i).setAddress(sc.next());
-						break;
-					case 4:
-						contactList.get(i).setCity(sc.next());
-						break;
-					case 5:
-						contactList.get(i).setState(sc.next());
-						break;
-					case 6:
-						contactList.get(i).setEmail(sc.next());
-						break;
-					case 7:
-						contactList.get(i).setPhoneNumber(sc.nextInt());
-						break;
-					case 8:
-						contactList.get(i).setZip(sc.nextInt());
-						break;
-					default:
-						return false;
-
-					}
-				}
-				else {
-					//System.out.println("Cannot be Edited");
-					return false;
-				}
-			}
-		}else {
-			//System.out.println("No Element Added");
-			return false;
-		}
-		return true;
-	}
-
-	public boolean deleteContact(String deleteContact) {
-		int flag = 0;
-		for(int i = 0;i < contactList.size(); i++  ) {
-			if(deleteContact.equals(contactList.get(i).getFirstName())) {
-				contactList.remove(0);
-				flag = 1;
-			}
-		}
-		if(flag == 1) {
-			return true;
-		} else
-			return false;
-
-	}
+        return (flag==true);
+    }
+    
+    public boolean deleteContact(String deleteContact) {
+        int flag = 0;
+        Iterator itr = contactList.entrySet().iterator();
+        while (itr.hasNext()) {
+            Map.Entry m = (Map.Entry)itr.next();
+            if(m.getKey().equals(deleteContact)) {
+                System.out.println(m.getKey()+"---"+m.getValue());
+                contactList.remove(deleteContact);
+                flag = 1;
+            }
+        }
+        return flag == 1;
+    }
 }
