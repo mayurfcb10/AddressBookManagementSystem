@@ -76,7 +76,7 @@ public class AddressBookMain {
             while(choice != 4);
 
             if(!addressBookListMap.containsKey(addressBookName)){
-                addressBookListMap.put(addressBookName, contactListMap);
+                addressBookListMap.putIfAbsent(addressBookName, contactListMap);
             }
 
 

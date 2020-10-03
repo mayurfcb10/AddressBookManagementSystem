@@ -18,7 +18,9 @@ public class AddressBook {
     }
 
     public HashMap<String, ContactDetails> addContact(String firstName, ContactDetails contactAdded){
-        contactList.put(firstName, contactAdded);
+        if(!contactListMap.containsKey(firstName)){
+            contactList.putIfAbsent(firstName, contactAdded);
+        }
         return contactList;
     }
 
@@ -79,7 +81,7 @@ public class AddressBook {
 
         return (flag==true);
     }
-    
+
     public boolean deleteContact(String deleteContact) {
         int flag = 0;
         Iterator itr = contactList.entrySet().iterator();
