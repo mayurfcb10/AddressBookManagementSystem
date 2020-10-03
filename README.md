@@ -15,7 +15,7 @@ UC6 Multiple Address Book with unique addressbook name.
 
 UC7 Multiple Address Book with unique name.
 
-UC8-9 Search person with respective state and city feature is added:
+UC8-9 Search nad view person with respective state and city feature is added:
 
 UC10  Count persons with respective city and state.
 
